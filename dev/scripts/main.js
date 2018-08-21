@@ -53,6 +53,3 @@ $(app.init)
 
 
 // DYNAMIC MATCH SCALE - for similar artists end point, there is a match score reletive to the searched artists 0-1
-
-
-console.log(ohHey);
