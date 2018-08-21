@@ -16,9 +16,9 @@ app.artistMethods = {
 // Function to make api calls for artists
 // Param 1 - the type of call you want to make | Param 2 - the artist you're making the querying for
 app.artistQuery = (method, artist) => {
-    app.similarArtistEndpoint = `http://ws.audioscrobbler.com/2.0/?method=artist.${method}`
+    app.artistUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.${method}`
     $.ajax({
-        url: app.similarArtistEndpoint,
+        url: app.artistUrl,
         method: 'GET',
         dataType: 'json',
         data: {
@@ -26,15 +26,7 @@ app.artistQuery = (method, artist) => {
             api_key: app.apiKey,
             format: 'json',
         }
-    }).then((res) => {
-        // create conditionals for each method that apply html if method is used
-        // call series of functions within conditional statements that save data to global scope
-        if (method === app.artistMethods.getSimilar) {
-            console.log(res.similarartists);
-            return res.similarartists
-        }
-        return res
-    });
+    })
 };
 
 
@@ -53,3 +45,5 @@ $(app.init)
 
 
 // DYNAMIC MATCH SCALE - for similar artists end point, there is a match score reletive to the searched artists 0-1
+
+// on user input - getSimilar
