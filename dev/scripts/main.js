@@ -46,7 +46,7 @@ app.events = () => {
 // Initialize app
 app.init = () => {
     app.events()
-    app.artistQuery(app.artistMethods.getTopAlbums, 'Radiohead')
+    app.artistQuery(app.artistMethods.getSimilar, 'Radiohead')
 }
 // Function ready
 $(app.init)
