@@ -8,3 +8,16 @@ html{
 	max-width: 900px;
 	margin: 0 auto;
 }
+
+.artistCard {
+	.artistCard__match{
+		width: 100%;
+		&--outerBar{
+			background-color: black;
+			padding: 1rem 0;
+		}	
+		&--innerBar{
+			background-color:blue;
+		}
+	}
+}
