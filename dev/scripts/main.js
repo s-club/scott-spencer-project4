@@ -17,7 +17,7 @@ app.artistMethods = {
 // Param 1 - the type of call you want to make | Param 2 - the artist you're making the querying for
 app.artistQuery = (method, artist) => {
     app.artistUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.${method}`
-    $.ajax({
+    return $.ajax({
         url: app.artistUrl,
         method: 'GET',
         dataType: 'json',
@@ -29,6 +29,52 @@ app.artistQuery = (method, artist) => {
     })
 };
 
+// 
+// create a new array of similar artist names that we can pass as the "artist value for our other api calls
+app.getSimilarArtists =
+$.when(app.artistQuery(app.artistMethods.getSimilar, "Local Natives"))
+.then((res) => {
+    const artist = res.similarartists.artist;
+    const artistArr = artist
+        .filter((artist) => artist.match >= .25)
+        .map((artist) => {
+            return {
+                name: artist.name,
+                match: artist.match
+            }
+        });
+        app.getSimilarArtistTags(artistArr)
+        console.log(artistArr)
+})
+
+app.getSimilarArtistTags = (array) => {
+    array.forEach((item) => {
+        $.when(app.artistQuery(app.artistMethods.getTopTags, item.name))
+        .then((res) => {
+            // create a variable for the tags array
+            const tags = res.toptags.tag
+            
+            // get the artist associated with each tags array
+            const artist = res.toptags['@attr'].artist
+
+            // filter the tags to those who are a match >= 10, then strip them to the essential info using map
+            const tagArr = tags
+                .filter((tag) => tag.count >= 10)
+                .map((tag) => {
+                    return {
+                        name: tag.name,
+                        count: tag.count
+                    }
+                })
+            
+            // if the tag artist matches the initial array item's artist, add the tags as a property of that item
+            if(artist === item.name){
+                item.tags = tagArr
+            }
+        })
+    });
+    return array
+}
 
 app.events = () => {
     // e events here. form submits, clicks etc...
@@ -38,7 +84,9 @@ app.events = () => {
 // Initialize app
 app.init = () => {
     app.events()
-    app.artistQuery(app.artistMethods.getSimilar, 'Radiohead')
+    app.getSimilarArtists;
+    
+    
 }
 // Function ready
 $(app.init)
