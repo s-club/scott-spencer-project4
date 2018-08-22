@@ -31,21 +31,24 @@ app.artistQuery = (method, artist) => {
 
 // 
 // create a new array of similar artist names that we can pass as the "artist value for our other api calls
-app.getSimilarArtists =
-$.when(app.artistQuery(app.artistMethods.getSimilar, "Local Natives"))
-.then((res) => {
-    const artist = res.similarartists.artist;
-    const artistArr = artist
-        .filter((artist) => artist.match >= .25)
-        .map((artist) => {
-            return {
-                name: artist.name,
-                match: artist.match
-            }
-        });
-        app.getSimilarArtistTags(artistArr)
-        console.log(artistArr)
-})
+app.getSimilarArtists = (artist) => {
+    $.when(app.artistQuery(app.artistMethods.getSimilar, artist))
+        .then((res) => {
+            const artist = res.similarartists.artist;
+            const artistArr = artist
+                .filter((artist) => artist.match >= .25)
+                .map((artist) => {
+                    return {
+                        name: artist.name,
+                        match: artist.match
+                    }
+                });
+            app.getSimilarArtistTags(artistArr)
+            app.createArtistCard(artistArr)
+            // console.log(artistArr)
+        })
+}
+
 
 app.getSimilarArtistTags = (array) => {
     array.forEach((item) => {
@@ -76,15 +79,47 @@ app.getSimilarArtistTags = (array) => {
     return array
 }
 
+app.createArtistCard = (array) => {
+    array.forEach((artist) => {
+        console.log( Math.floor(Number(artist.match).toFixed(2) * 180));
+
+        const artistCard = $("<section>").addClass('artistCard')
+        const percentMatch = Math.floor(Number(artist.match).toFixed(2) * 100)
+
+        $('main').append(artistCard)
+
+        $(artistCard).append(`
+        <div class="artistCard__banner">
+            <div class="artistCard__name">
+                <h3>${artist.name}</h3>
+            </div>
+            <div class="artistCard__match">
+                <div class="artistCard__match artistCard__match--outerBar">
+                    <div class="artistCard__match artistCard__match--innerBar">${percentMatch}%</div>
+				</div>
+			</div>
+        </div>
+        <div class="artistCard__expand"></div>
+        `)
+    });
+    $('.artistCard__match--innerBar').css({width: "50%"})
+}
+
 app.events = () => {
     // e events here. form submits, clicks etc...
+    $('.searchForm').on('submit', function(e){
+        e.preventDefault();
+    app.searchArtist = $(this).find('.searchForm__input').val();
+    app.getSimilarArtists(app.searchArtist);
+        // console.log(app.searchArtist);
+    })
 };
 
 
 // Initialize app
 app.init = () => {
     app.events()
-    app.getSimilarArtists;
+    
     
     
 }
