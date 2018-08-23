@@ -11,13 +11,15 @@ html{
 
 .artistCard {
 	.artistCard__match{
-		width: 100%;
 		&--outerBar{
-			background-color: black;
-			padding: 1rem 0;
+			width: 100%;
+			background-color: silver;
+			padding: .25rem 0;
 		}	
 		&--innerBar{
-			background-color:blue;
+			background-color:gold;
+			padding: .5rem 0;
+			// width: inherit;
 		}
 	}
 }

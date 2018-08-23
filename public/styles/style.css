@@ -138,10 +138,11 @@ html {
   max-width: 900px;
   margin: 0 auto; }
 
-.artistCard .artistCard__match {
-  width: 100%; }
-  .artistCard .artistCard__match--outerBar {
-    background-color: black;
-    padding: 1rem 0; }
-  .artistCard .artistCard__match--innerBar {
-    background-color: blue; }
+.artistCard .artistCard__match--outerBar {
+  width: 100%;
+  background-color: silver;
+  padding: .25rem 0; }
+
+.artistCard .artistCard__match--innerBar {
+  background-color: gold;
+  padding: .5rem 0; }
