@@ -46,6 +46,8 @@ app.getSimilarArtists = (artist) => {
                 });
             // get genre tags for the similar artists, add tags as property on artistsArr
             app.getSimilarArtistTags(artistArr);
+            // get top albums for the similar artists 
+            app.getSimilarArtistsTopAlbums(artistArr);
             // get top tracks for the similar artists, add tracks as property on artistsArr
             app.getSimilarArtistsTopTracks(artistArr);
             app.createArtistCard(artistArr)
@@ -121,6 +123,40 @@ app.getSimilarArtistsTopTracks = (array) => {
 
     return array
 }
+
+app.getSimilarArtistsTopAlbums = (array) => {
+    array.forEach((item) => {
+        $.when(app.artistQuery(app.artistMethods.getTopAlbums, item.name, 5))
+        .then((res) => {
+            const artist = app.getArtistFromRes(res.topalbums);
+            // console.log(artist);
+            const albums = res.topalbums.album
+            // Map the array of albums returned by the API to display only the content we want
+            const albumArr = albums.
+            map((album) => {
+                return{
+                    album: album.name,
+                    playcount: album.playcount,
+                    image: album.image.
+                    filter((img) => img.size === "extralarge").
+                    map((img) => img["#text"]).toString(),
+                    
+                }
+            });
+            // Map if album artist matches the initial array items artist
+            // Add the album array as a property of that item
+
+            if(artist === item.name){
+                item.albums = albumArr;
+            }
+
+            // console.log("artist", artist, "Item:", item.name)
+        })
+    })
+    return array 
+}
+
+
 
 app.getArtistFromRes = (rootObject) => {
     return rootObject['@attr'].artist
