@@ -228,9 +228,14 @@ app.addPropsToDom = (array, prop) => {
             if (artist.name === artistData) {
                 artist[prop].forEach((item) => {
                     if(item.playcount !== undefined){
-                        $(this).parent().find(`.artistCard__${prop} ul`).append(`<li>${item.name}<span>${item.playcount}</span></li>`)
+                        $(this).parent().find(`.artistCard__${prop} ul`).append(`<li>
+                            <h4>${item.name}</h4>
+                            <h4>Times played: ${item.playcount}</h4>
+                        </li>`)
                     } else{
-                        $(this).parent().find(`.artistCard__${prop} ul`).append(`<li>${item.name}</li>`)
+                        $(this).parent().find(`.artistCard__${prop} ul`).append(`<li>
+                            <h4>${item.name}</h4>
+                        </li>`)
                     }
                 });
             }
