@@ -138,6 +138,9 @@ html {
   max-width: 900px;
   margin: 0 auto; }
 
+.artistCard__banner {
+  cursor: pointer; }
+
 .artistCard .artistCard__match--outerBar {
   width: 100%;
   background-color: silver;
