@@ -55,6 +55,8 @@ app.getSimilarArtists = (artist) => {
                 .then(() => {
 
                     app.createArtistCard(artistArr)
+                    
+                    $(".loadingOverlay").hide("fade", 500)
                     // console.log(artistArr)
                 });
         })
@@ -214,6 +216,7 @@ app.createArtistCard = (array) => {
 
     // make the match percent meter reflect the match value
     app.percentMatch()
+
 }
 
 // Function to add property to DOM
@@ -267,6 +270,7 @@ app.events = () => {
         e.preventDefault();
         app.searchArtist = $(this).find('.searchForm__input').val();
         app.getSimilarArtists(app.searchArtist);
+        $(".loadingOverlay").show("fade", 500)
         // console.log(app.searchArtist);
     })
 
@@ -279,6 +283,9 @@ app.events = () => {
 // Initialize app
 app.init = () => {
     app.events()
+
+    $(".loadingOverlay").hide("fade", 500)
+
 }
 // Function ready
 $(app.init)
