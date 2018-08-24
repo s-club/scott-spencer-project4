@@ -4,6 +4,12 @@ html{
 	font-size: 20px;
 }
 
+body{
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
 .container {
 	max-width: 900px;
 	margin: 0 auto;
@@ -25,4 +31,86 @@ html{
 			// width: inherit;
 		}
 	}
+}
+.artistCardContainer{
+	position: relative;
+}
+
+.loadingOverlay{
+	display: grid;
+	justify-content: center;
+	display: none;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	// height: 100vh;
+	// width: 100vw;
+	background: radial-gradient(circle at center, white 20% , transparent 300%);
+	.spinner {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: block;
+		float: left;
+		width: 3rem;
+		height: 3rem;
+		border-radius: 50%;
+		border: .33rem solid black;
+		animation: spinner 0.75s cubic-bezier(.3,.55,.7,.55) infinite;
+		box-shadow: -.5vmin -.5vmin 0 1vmin black;
+		
+	}
+	// svg{
+	// 	fill: transparent;
+	// 	stroke: blue;
+	// 	stroke-width: 1rem;
+	// 	// stroke-dasharray: 400;
+	// 	// stroke-dashoffset: 100;
+	// 	// stroke-dasharray: 65;
+	// 	// transform: rotate(0deg);
+	// 	animation: load 2s linear infinite;
+	// 	animation-fill-mode: forwards;
+	// 	animation-direction: normal;
+	// 	transition: transform 5s, stroke-dasharray 5s, stroke-dashoffset 5s;
+	// 	&:hover{
+	// 		// stroke-dasharray: 400;
+	// 		// stroke-dashoffset: 0;
+	// 		// transform: rotate(10deg);
+	// 	}
+	// }
+}
+@keyframes spinner {
+	0% { transform: rotate(0); }
+	100% { transform: rotate(360deg); }
+}
+@keyframes load {
+	0%{
+		
+	}
+	100%{
+		
+		
+	}
+
+	from{
+		transform: rotate(0deg);
+		stroke-dasharray: 150;
+		// stroke-dashoffset: 100;
+	}
+	
+	to{
+		transform: rotate(180deg);
+		// stroke-dashoffset: 0;
+		stroke-dasharray: 375;
+	}
+
+	// 100%{
+	// 	stroke-dasharray: 65;
+	// 	stroke-dashoffset: 0;
+	// 	transform: rotate(125deg);
+	// }
 }

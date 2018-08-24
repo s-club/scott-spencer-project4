@@ -134,6 +134,11 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 html {
   font-size: 20px; }
 
+body {
+  position: relative;
+  padding: 0;
+  margin: 0; }
+
 .container {
   max-width: 900px;
   margin: 0 auto; }
@@ -149,3 +154,78 @@ html {
 .artistCard .artistCard__match--innerBar {
   background-color: gold;
   padding: .5rem 0; }
+
+.artistCardContainer {
+  position: relative; }
+
+.loadingOverlay {
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at center, white 20%, transparent 300%); }
+  .loadingOverlay .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    display: block;
+    float: left;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: .33rem solid black;
+    -webkit-animation: spinner 0.75s cubic-bezier(0.3, 0.55, 0.7, 0.55) infinite;
+            animation: spinner 0.75s cubic-bezier(0.3, 0.55, 0.7, 0.55) infinite;
+    -webkit-box-shadow: -.5vmin -.5vmin 0 1vmin black;
+            box-shadow: -.5vmin -.5vmin 0 1vmin black; }
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@-webkit-keyframes load {
+  0% { }
+  100% { }
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    stroke-dasharray: 150; }
+  to {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+    stroke-dasharray: 375; } }
+
+@keyframes load {
+  0% { }
+  100% { }
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    stroke-dasharray: 150; }
+  to {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+    stroke-dasharray: 375; } }
