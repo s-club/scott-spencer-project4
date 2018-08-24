@@ -38,6 +38,7 @@ label {
 	left: 50%;
 	transform: translateX(-50%);
 	transition: left .3s;
+	z-index: -1;
 	// padding: 5px 5px 50px 5px;
 	// margin-left: 20%;
 	// border-bottom: 2px solid $white;
