@@ -205,27 +205,3 @@ body {
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg); } }
-
-@-webkit-keyframes load {
-  0% { }
-  100% { }
-  from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-    stroke-dasharray: 150; }
-  to {
-    -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
-    stroke-dasharray: 375; } }
-
-@keyframes load {
-  0% { }
-  100% { }
-  from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-    stroke-dasharray: 150; }
-  to {
-    -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
-    stroke-dasharray: 375; } }

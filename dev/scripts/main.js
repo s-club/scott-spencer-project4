@@ -55,6 +55,7 @@ app.getSimilarArtists = (artist) => {
                 .then(() => {
 
                     app.createArtistCard(artistArr)
+                    
                     $(".loadingOverlay").hide("fade", 500)
                     // console.log(artistArr)
                 });
@@ -280,6 +281,7 @@ app.events = () => {
 // Initialize app
 app.init = () => {
     app.events()
+
     $(".loadingOverlay").hide("fade", 500)
 
 }
