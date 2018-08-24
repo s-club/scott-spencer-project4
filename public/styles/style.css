@@ -133,40 +133,75 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 
 html {
   font-size: 20px;
-  font-family: 'Muli', sans-serif;
+  font-family: "Overpass", sans-serif;
+  font-weight: 600;
   /* Fluid font sizing | scales based on viewport width and desired min/max font sizes*/
   font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1440 - 320)));
-  color: #b0b8c5f6;
-  text-align: center; }
+  color: #022644;
+  background: #D7E3ED; }
 
-main {
-  -ms-flex-line-pack: center;
-      align-content: center; }
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  header form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: relative;
+    margin-top: 11vmax;
+    font-size: 1.2rem; }
 
-body {
-  background-color: #6c7077; }
+.wrapper {
+  width: 95%;
+  margin: 0 auto; }
 
 label {
-  padding: 5px 5px 50px 5px; }
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-transition: left .3s;
+  transition: left .3s; }
 
-label span {
+span {
   color: #f3bbae;
   font-weight: 800; }
 
 input {
-  padding: 5px;
-  margin-top: 70px;
-  margin-left: 30px;
-  margin-bottom: 50px; }
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #F9FCFF;
+  padding-bottom: .5rem; }
+  input[type="text"] {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2; }
+    input[type="text"]:focus + label {
+      left: 7%; }
+  input[type="submit"] {
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
+    position: absolute;
+    right: 0; }
 
 h1 {
-  color: #a2adbc;
-  margin: 5px;
-  padding: 15px; }
+  color: #a2adbc; }
 
-h1 span {
-  color: #f3bbae;
-  font-size: 50px; }
+ul {
+  list-style: none;
+  padding: 0; }
 
 body {
   position: relative;
@@ -180,14 +215,55 @@ body {
 .artistCard__banner {
   cursor: pointer; }
 
+.artistCard__name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
 .artistCard .artistCard__match--outerBar {
   width: 100%;
-  background-color: silver;
+  background-color: #f3bbae;
   padding: .25rem 0; }
 
 .artistCard .artistCard__match--innerBar {
-  background-color: #f3bbae;
-  padding: .5rem 0; }
+  background-color: #022644;
+  color: #f3bbae;
+  padding: .5rem 0 .5rem .5rem; }
+
+.artistCard__tags, .artistCard__tracks, .artistCard__albums {
+  margin: 4rem 0; }
+  .artistCard__tags li, .artistCard__tracks li, .artistCard__albums li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    border-bottom: 2px solid #F9FCFF; }
+
+.artistCard__tags ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.artistCard__tags li {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: none;
+  background: #022644;
+  color: #D7E3ED;
+  margin: .5rem;
+  text-align: center; }
+  .artistCard__tags li h4 {
+    width: 100%; }
 
 .artistCardContainer {
   position: relative; }

@@ -1,58 +1,94 @@
-@import 'setup';
+@import 'partials/setup';
+@import 'partials/utils';
 
 html{
 	font-size: 20px;
-	font-family: 'Muli', sans-serif;
+	font-family: $mainfont;
+	font-weight: 600;
 	/* Fluid font sizing | scales based on viewport width and desired min/max font sizes*/
 	font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1440 - 320)));
-	color: #b0b8c5f6;
-	text-align: center;
+	color: $dark;
+	background: $light;
+	// text-align: center;
 }
-
+header{
+	display: flex;
+	justify-content: center;
+	form{
+		display: flex;
+		justify-content: center;
+		position: relative;
+		margin-top: 11vmax;
+		font-size: 1.2rem;
+	}
+}
 .wrapper {
-	// width: 80%;
+	width: 95%;
+	margin: 0 auto;
 }
 //  MAKE SURE YA GULP IS RUNNIN YA GOOF - coolors.co
 
 main {
-	align-content: center;
-}
-
-body {
-	// background-color: #d9e2e1;
-		// color: #a2adbc;
-	background-color: #6c7077;
-
+	// align-content: center;
 }
 
 label {
-	padding: 5px 5px 50px 5px;
+	order: 1;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: left .3s;
+	// padding: 5px 5px 50px 5px;
 	// margin-left: 20%;
+	// border-bottom: 2px solid $white;
 }
 
-label span {
-	color: #f3bbae;
+span {
+	color: $contrast;
 	font-weight: 800;
 }
 
-input {
-	padding: 5px;
-	margin-top: 70px;
-	margin-left: 30px;
-	margin-bottom: 50px;
+input{
+	background-color: transparent;
+	border: none;
+	outline: none;
+	border-bottom: 2px solid $white;
+	padding-bottom: .5rem;
+	&[type="text"]{
+		order: 2;
+		&:focus{
+			+ label{
+				left: 7%;
+			}
+		}
+	}
+	&[type="submit"]{
+		order: 3;
+		position: absolute;
+		right: 0;
+	}
+	// padding: 5px;
+	// margin-top: 70px;
+	// margin-left: 30px;
+	// margin-bottom: 50px;
 }
 
 h1 {
 	// color: #6c7077;
 	color: #a2adbc;
-	margin: 5px;
-	padding: 15px;
+	// margin: 5px;
+	// padding: 15px;
 }
 
 h1 span {
-	color: #f3bbae;
-	font-size: 50px;
+	// color: #f3bbae;
+	// font-size: 50px;
 
+}
+
+ul{
+	list-style: none;
+	padding: 0;
 }
 
 body{
@@ -70,18 +106,53 @@ body{
 	&__banner{
 		cursor: pointer;
 	}
+	&__name{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 	.artistCard__match{
 		&--outerBar{
 			width: 100%;
-			background-color: silver;
+			background-color: $contrast;
 			padding: .25rem 0;
 		}	
 		&--innerBar{
-			background-color: #f3bbae;
-			padding: .5rem 0;
+			background-color: $dark;
+			color: $contrast;
+			padding: .5rem 0 .5rem .5rem;
 			// width: inherit;
 		}
 	}
+	&__tags, &__tracks, &__albums{
+		margin: 4rem 0;
+		li{
+			display: flex;
+			width: 100%;
+			justify-content: space-between;
+			border-bottom: 2px solid $white;
+		}
+	}
+	&__tags{
+		ul{
+			display: flex;
+			// flex-wrap: wrap;
+		}
+		li{
+			// display: flex;
+			// width: 25%;
+			justify-content: space-between;
+			border-bottom: none;
+			background: $dark;
+			color: $light;
+			margin: .5rem;
+			text-align: center;
+			h4{
+				width: 100%;
+			}
+		}
+	}
+
 }
 .artistCardContainer{
 	position: relative;

@@ -55,7 +55,7 @@ app.getSimilarArtists = (artist) => {
                 .then(() => {
 
                     app.createArtistCard(artistArr)
-                    
+
                     $(".loadingOverlay").hide("fade", 500)
                     // console.log(artistArr)
                 });
@@ -183,8 +183,9 @@ app.createArtistCard = (array) => {
 
         $(artistCard).append(`
         <div class="artistCard artistCard__banner" data-artist="${artist.name}">
-            <div class="artistCard__name">
+            <div class="artistCard artistCard__name">
                 <h3>${artist.name}</h3>
+                <i class="fas fa-chevron-down"></i>
             </div>
             <div class="artistCard artistCard__match">
                 <div class="artistCard__match artistCard__match--outerBar">
@@ -277,6 +278,16 @@ app.events = () => {
     $('.artistCardContainer').on('click', '.artistCard__banner', function(){
         const artist = $(this).data('artist')
         $(".artistCard__expand").toggle(500);
+    });
+
+    // $('.searchForm').find('input')
+    $('.searchForm').find('.searchForm__input').on('keyup', function(e){
+        const inputVal = $(this).val()
+        if(inputVal !== ""){
+            $(this).parent().find('label').css({left: '7%'})
+        } else {
+            $(this).parent().find('label').css({ left: '50%', transform: 'translateX(-50%)'})
+        }
     });
 };
 
