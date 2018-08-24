@@ -241,7 +241,9 @@ app.addPropsToDom = (array, prop) => {
             }
         });
     })
+    $(".artistCard__expand").hide();
 }
+
 
 // A function to make the "match meter" match it's width % to it's data('percentmatch') value
 app.percentMatch = () => {
@@ -255,6 +257,10 @@ app.percentMatch = () => {
     
 };
 
+app.setDefaultState = () => {
+    $('.artistCard__expand').hide();
+}
+ 
 app.events = () => {
     // e events here. form submits, clicks etc...
     $('.searchForm').on('submit', function(e){
@@ -265,12 +271,10 @@ app.events = () => {
     })
 
     $('.artistCardContainer').on('click', '.artistCard__banner', function(){
-        console.log('ARTIST CARD BANNER CLICKED')
         const artist = $(this).data('artist')
-        console.log(artist)
+        $(".artistCard__expand").toggle(500);
     });
 };
-
 
 // Initialize app
 app.init = () => {
