@@ -2,6 +2,57 @@
 
 html{
 	font-size: 20px;
+	font-family: 'Muli', sans-serif;
+	/* Fluid font sizing | scales based on viewport width and desired min/max font sizes*/
+	font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1440 - 320)));
+	color: #b0b8c5f6;
+	text-align: center;
+}
+
+.wrapper {
+	// width: 80%;
+}
+//  MAKE SURE YA GULP IS RUNNIN YA GOOF - coolors.co
+
+main {
+	align-content: center;
+}
+
+body {
+	// background-color: #d9e2e1;
+		// color: #a2adbc;
+	background-color: #6c7077;
+
+}
+
+label {
+	padding: 5px 5px 50px 5px;
+	// margin-left: 20%;
+}
+
+label span {
+	color: #f3bbae;
+	font-weight: 800;
+}
+
+input {
+	padding: 5px;
+	margin-top: 70px;
+	margin-left: 30px;
+	margin-bottom: 50px;
+}
+
+h1 {
+	// color: #6c7077;
+	color: #a2adbc;
+	margin: 5px;
+	padding: 15px;
+}
+
+h1 span {
+	color: #f3bbae;
+	font-size: 50px;
+
 }
 
 body{
@@ -26,7 +77,7 @@ body{
 			padding: .25rem 0;
 		}	
 		&--innerBar{
-			background-color:gold;
+			background-color: #f3bbae;
 			padding: .5rem 0;
 			// width: inherit;
 		}
