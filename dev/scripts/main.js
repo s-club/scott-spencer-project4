@@ -277,7 +277,7 @@ app.events = () => {
 
     $('.artistCardContainer').on('click', '.artistCard__banner', function(){
         const artist = $(this).data('artist')
-        $(".artistCard__expand").toggle(500);
+        $(this).parent().find(".artistCard__expand").toggle("slide",{direction: "up"}, 500);
     });
 
     // $('.searchForm').find('input')
