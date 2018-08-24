@@ -4,6 +4,12 @@ html{
 	font-size: 20px;
 }
 
+body{
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
 .container {
 	max-width: 900px;
 	margin: 0 auto;
@@ -25,4 +31,39 @@ html{
 			// width: inherit;
 		}
 	}
+}
+.artistCardContainer{
+	position: relative;
+}
+
+.loadingOverlay{
+	display: grid;
+	justify-content: center;
+	display: none;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: radial-gradient(circle at center, white 20% , transparent 300%);
+	.spinner {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: block;
+		float: left;
+		width: 3rem;
+		height: 3rem;
+		border-radius: 50%;
+		border: .33rem solid black;
+		animation: spinner 0.75s cubic-bezier(.3,.55,.7,.55) infinite;
+		box-shadow: -.5vmin -.5vmin 0 1vmin black;
+		
+	}
+}
+@keyframes spinner {
+	0% { transform: rotate(0); }
+	100% { transform: rotate(360deg); }
 }

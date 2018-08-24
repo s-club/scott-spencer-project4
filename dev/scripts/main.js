@@ -55,6 +55,8 @@ app.getSimilarArtists = (artist) => {
                 .then(() => {
 
                     app.createArtistCard(artistArr)
+                    
+                    $(".loadingOverlay").hide("fade", 500)
                     // console.log(artistArr)
                 });
         })
@@ -214,6 +216,7 @@ app.createArtistCard = (array) => {
 
     // make the match percent meter reflect the match value
     app.percentMatch()
+
 }
 
 // Function to add property to DOM
@@ -241,6 +244,7 @@ app.addPropsToDom = (array, prop) => {
             }
         });
     })
+    $(".artistCard__expand").hide(500)
 }
 
 // A function to make the "match meter" match it's width % to it's data('percentmatch') value
@@ -261,13 +265,15 @@ app.events = () => {
         e.preventDefault();
         app.searchArtist = $(this).find('.searchForm__input').val();
         app.getSimilarArtists(app.searchArtist);
+        $(".loadingOverlay").show("fade", 500)
         // console.log(app.searchArtist);
     })
 
     $('.artistCardContainer').on('click', '.artistCard__banner', function(){
         console.log('ARTIST CARD BANNER CLICKED')
         const artist = $(this).data('artist')
-        console.log(artist)
+        $(this).parent().find(".artistCard__expand").toggle("slide", {direction: "up"},500)
+        // console.log(artist)
     });
 };
 
@@ -275,6 +281,9 @@ app.events = () => {
 // Initialize app
 app.init = () => {
     app.events()
+
+    $(".loadingOverlay").hide("fade", 500)
+
 }
 // Function ready
 $(app.init)
