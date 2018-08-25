@@ -171,7 +171,8 @@ label {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   -webkit-transition: left .3s;
-  transition: left .3s; }
+  transition: left .3s;
+  z-index: -1; }
 
 span {
   color: #f3bbae;

@@ -289,6 +289,9 @@ app.events = () => {
             $(this).parent().find('label').css({ left: '50%', transform: 'translateX(-50%)'})
         }
     });
+    $(window).on('unload', function(){
+        $('.searchForm__input').val("")
+    });
 };
 
 // Initialize app
