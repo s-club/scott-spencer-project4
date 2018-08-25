@@ -39,7 +39,7 @@ app.getSimilarArtists = function (artist) {
     app.artistQuery(app.artistMethods.getSimilar, artist).then(function (res) {
         var artist = res.similarartists.artist;
         var artistArr = artist.filter(function (artist) {
-            return artist.match >= .25;
+            return artist.match >= .30;
         }).map(function (artist) {
             return {
                 name: artist.name,
@@ -176,7 +176,7 @@ app.createArtistCard = function (array) {
         var percentMatch = Math.floor(Number(artist.match).toFixed(2) * 100);
         $('.artistCardContainer').append(artistCard);
 
-        $(artistCard).append('\n        <div class="artistCard artistCard__banner" data-artist="' + artist.name + '">\n            <div class="artistCard artistCard__name">\n                <h3>' + artist.name + '</h3>\n                <i class="fas fa-chevron-down"></i>\n            </div>\n            <div class="artistCard artistCard__match">\n                <div class="artistCard__match artistCard__match--outerBar">\n                    <div class="artistCard__match artistCard__match--innerBar" data-percentMatch="' + percentMatch + '">' + percentMatch + '%</div>\n\t\t\t\t</div>\n\t\t\t</div>\n        </div>\n        <div class="artistCard artistCard__expand">\n            <div class="artistCard artistCard__tags">\n                <ul></ul>\n            </div>\n            <div class="artistCard artistCard__tracks">\n                <ul></ul>\n            </div>\n            <div class="artistCard artistCard__albums">\n                <ul></ul>\n            </div>\n        </div>\n        ');
+        $(artistCard).append('\n        <div class="artistCard artistCard__banner" data-artist="' + artist.name + '">\n            <div class="artistCard artistCard__name">\n                <h3>' + artist.name + '</h3>\n                <i class="fas fa-chevron-down"></i>\n            </div>\n            <div class="artistCard artistCard__match">\n                <div class="artistCard__match artistCard__match--outerBar">\n                    <div class="artistCard__match artistCard__match--innerBar" data-percentMatch="' + percentMatch + '">' + percentMatch + '%</div>\n\t\t\t\t</div>\n\t\t\t</div>\n        </div>\n        <div class="artistCard artistCard__expand">\n            <div class="artistCard artistCard__tags">\n                <ul></ul>\n            </div>\n            <div class="artistCard artistCard__tracks">\n                <h3>Top Tracks:</h3>\n                <ul></ul>\n            </div>\n            <div class="artistCard artistCard__albums">\n                <h3>Top Albums:</h3>\n                <ul></ul>\n            </div>\n        </div>\n        ');
     });
     // add tags to dom
     app.addPropsToDom(array, "tags");
@@ -243,15 +243,16 @@ app.events = function () {
     $('.artistCardContainer').on('click', '.artistCard__banner', function () {
         var artist = $(this).data('artist');
         $(this).parent().find(".artistCard__expand").toggle("slide", { direction: "up" }, 500);
+        $(this).find('svg').toggleClass('bannerClick');
     });
 
     // $('.searchForm').find('input')
     $('.searchForm').find('.searchForm__input').on('keyup', function (e) {
         var inputVal = $(this).val();
         if (inputVal !== "") {
-            $(this).parent().find('label').css({ left: '7%' });
+            $(this).parent().find('label').css({ top: '-50%' });
         } else {
-            $(this).parent().find('label').css({ left: '50%', transform: 'translateX(-50%)' });
+            $(this).parent().find('label').css({ top: '0%' });
         }
     });
     $(window).on('unload', function () {

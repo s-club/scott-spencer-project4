@@ -38,7 +38,7 @@ app.getSimilarArtists = (artist) => {
         .then((res) => {
             const artist = res.similarartists.artist;
             let artistArr = artist
-                .filter((artist) => artist.match >= .25)
+                .filter((artist) => artist.match >= .30)
                 .map((artist) => {
                     return {
                         name: artist.name,
@@ -198,9 +198,11 @@ app.createArtistCard = (array) => {
                 <ul></ul>
             </div>
             <div class="artistCard artistCard__tracks">
+                <h3>Top Tracks:</h3>
                 <ul></ul>
             </div>
             <div class="artistCard artistCard__albums">
+                <h3>Top Albums:</h3>
                 <ul></ul>
             </div>
         </div>
@@ -278,15 +280,16 @@ app.events = () => {
     $('.artistCardContainer').on('click', '.artistCard__banner', function(){
         const artist = $(this).data('artist')
         $(this).parent().find(".artistCard__expand").toggle("slide",{direction: "up"}, 500);
+        $(this).find('svg').toggleClass('bannerClick')
     });
 
     // $('.searchForm').find('input')
     $('.searchForm').find('.searchForm__input').on('keyup', function(e){
         const inputVal = $(this).val()
         if(inputVal !== ""){
-            $(this).parent().find('label').css({left: '7%'})
+            $(this).parent().find('label').css({top: '-50%'})
         } else {
-            $(this).parent().find('label').css({ left: '50%', transform: 'translateX(-50%)'})
+            $(this).parent().find('label').css({top: '0%'})
         }
     });
     $(window).on('unload', function(){
