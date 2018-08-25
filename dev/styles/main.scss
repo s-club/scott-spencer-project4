@@ -4,11 +4,12 @@
 html{
 	font-size: 20px;
 	font-family: $mainfont;
-	font-weight: 600;
+	font-weight: 300;
 	/* Fluid font sizing | scales based on viewport width and desired min/max font sizes*/
 	font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1440 - 320)));
 	color: $dark;
 	background: $light;
+	letter-spacing: .05rem;
 	// text-align: center;
 }
 header{
@@ -16,11 +17,51 @@ header{
 	justify-content: center;
 	form{
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
+		align-items: center; 
 		position: relative;
 		margin-top: 11vmax;
 		font-size: 1.2rem;
 	}
+
+input{
+	background-color: transparent;
+	border: none;
+	outline: none;
+	border-radius: 0;
+	font-size: 1rem;
+	font-weight: 300;
+	color: inherit;
+	&[type="text"]{
+		margin-bottom: 1rem;
+		border-bottom: 2px solid $white;
+		padding-bottom: .5rem;
+		order: 2;
+		text-align: center;
+		&:focus{
+			+ label{
+				top: -50%;
+			}
+		}
+	}
+	&[type="submit"]{
+		order: 3;
+		max-width: 25vmax;
+		background: $dark;
+		color: $light;
+		font-size: .75rem;
+		padding: .25rem .75rem;
+		transition: color .2s ease-in-out, background .2s ease-in-out, padding .2s ease-in-out;
+		&:hover {
+			background: $contrast;
+			color: $dark;
+			font-weight: 400;
+			padding: .25rem 1rem;
+		}
+	}
+}
+
 }
 .wrapper {
 	width: 95%;
@@ -34,11 +75,15 @@ main {
 
 label {
 	order: 1;
+	font-size: 1rem;
+	width: 100%;
+	text-align: center;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-	transition: left .3s;
+	transition: top .3s;
 	z-index: -1;
+	top: 0%;
 	// padding: 5px 5px 50px 5px;
 	// margin-left: 20%;
 	// border-bottom: 2px solid $white;
@@ -47,31 +92,6 @@ label {
 span {
 	color: $contrast;
 	font-weight: 800;
-}
-
-input{
-	background-color: transparent;
-	border: none;
-	outline: none;
-	border-bottom: 2px solid $white;
-	padding-bottom: .5rem;
-	&[type="text"]{
-		order: 2;
-		&:focus{
-			+ label{
-				left: 7%;
-			}
-		}
-	}
-	&[type="submit"]{
-		order: 3;
-		position: absolute;
-		right: 0;
-	}
-	// padding: 5px;
-	// margin-top: 70px;
-	// margin-left: 30px;
-	// margin-bottom: 50px;
 }
 
 h1 {
@@ -106,6 +126,13 @@ body{
 .artistCard {
 	&__banner{
 		cursor: pointer;
+		margin-bottom: 1rem;
+		border-bottom: $borderThin;
+		padding-bottom: .5rem;
+		border-color: $white;
+		h3 {
+		margin-bottom: .33rem;	
+		}
 	}
 	&__name{
 		display: flex;
@@ -127,25 +154,48 @@ body{
 	}
 	&__tags, &__tracks, &__albums{
 		margin: 4rem 0;
+		font-size: 0.8rem;
 		li{
 			display: flex;
-			width: 100%;
+			// width: 100%;
+			padding: .5rem 1rem;
 			justify-content: space-between;
 			border-bottom: 2px solid $white;
 		}
+		h4{
+			font-weight: 300;
+			margin: 0;
+			}
 	}
+
+	&__tracks, &__albums{
+
+		li {
+			display: flex;
+			flex-wrap: wrap;
+			padding: .8rem 0;
+			width: 100%;
+		}
+		h4 {
+			width: 100%;
+			margin: .25rem 0;
+		}
+	}	
+
 	&__tags{
 		ul{
 			display: flex;
-			// flex-wrap: wrap;
+			flex-wrap: wrap;
+			justify-content: center;
 		}
 		li{
 			// display: flex;
 			// width: 25%;
 			justify-content: space-between;
 			border-bottom: none;
-			background: $dark;
-			color: $light;
+			// background: $dark;
+			border: $borderDark;
+			color: $dark;
 			margin: .5rem;
 			text-align: center;
 			h4{
@@ -159,6 +209,10 @@ body{
 	position: relative;
 }
 
+.bannerClick {
+	transform: rotate(180deg);
+}
+
 .loadingOverlay{
 	display: grid;
 	justify-content: center;
@@ -169,7 +223,7 @@ body{
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background: radial-gradient(circle at center, white 20% , transparent 300%);
+	background: radial-gradient(circle at center, $light 20% , transparent 300%);
 	.spinner {
 		position: absolute;
 		top: 50%;
@@ -180,9 +234,9 @@ body{
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
-		border: .33rem solid black;
+		border: .33rem solid $dark;
 		animation: spinner 0.75s cubic-bezier(.3,.55,.7,.55) infinite;
-		box-shadow: -.5vmin -.5vmin 0 1vmin black;
+		box-shadow: -.5vmin -.5vmin 0 1vmin $dark;
 		
 	}
 }
@@ -190,3 +244,29 @@ body{
 	0% { transform: rotate(0); }
 	100% { transform: rotate(360deg); }
 }
+
+/* Portrait tablet and small desktops */
+@media (min-width: 940px) {}
+/* Landscape phone to portrait tablet */
+@media (min-width: 768px) {
+
+	.artistCard {
+
+		&__tracks, &__albums{
+
+			li {
+				flex-wrap: initial;
+				justify-content: space-between;
+			}
+			
+			h4 {
+				width: initial;
+
+			}
+		}	
+	}
+}
+/* Landscape phones and down */
+@media (min-width: 480px) {}
+
+
