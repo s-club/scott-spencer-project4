@@ -264,7 +264,7 @@ app.percentMatch = () => {
 app.setDefaultState = () => {
     $('.artistCard__expand').hide();
 }
- 
+
 app.events = () => {
     // e events here. form submits, clicks etc...
     $('.searchForm').on('submit', function(e){
@@ -297,10 +297,9 @@ app.events = () => {
 // Initialize app
 app.init = () => {
     app.events()
-
     $(".loadingOverlay").hide("fade", 500)
-
 }
+
 // Function ready
 $(app.init)
 
