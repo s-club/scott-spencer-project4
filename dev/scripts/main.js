@@ -17,7 +17,7 @@ app.artistMethods = {
 // Function to make api calls for artists
 // Param 1 - the type of call you want to make | Param 2 - the artist you're making the querying for
 app.artistQuery = (method, artist, limit) => {
-    app.artistUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.${method}`
+    app.artistUrl = `https://ws.audioscrobbler.com/2.0/?method=artist.${method}`
     return $.ajax({
         url: app.artistUrl,
         method: 'GET',
