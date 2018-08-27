@@ -76,6 +76,7 @@ footer{
 	align-self: flex-end;
 	background: $dark;
 	color: $light;
+	font-size: .7rem;
 	h4{
 		font-weight: 300;
 		margin: .5rem 0;
@@ -178,7 +179,7 @@ body{
 		}
 	}
 	&__tags, &__tracks, &__albums{
-		margin: 4rem 0;
+		margin: 2rem 0;
 		font-size: 0.8rem;
 		li{
 			display: flex;
@@ -194,6 +195,28 @@ body{
 	}
 
 	&__tracks, &__albums{
+		ul {
+			position: relative;
+			height: 100%;
+			background: transparent;
+			z-index: 100;
+			overflow: visible;
+			&.fade{
+				max-height: 40vh;
+				overflow: hidden;
+				&:before{
+					content: '';
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left:0;
+					background: linear-gradient(to top, $light 20%, rgba(255, 255, 255, 0));
+					transition: top .3s;
+					
+				}
+			}
+		}
 		li {
 			display: flex;
 			flex-wrap: wrap;
@@ -203,9 +226,36 @@ body{
 		h4 {
 			width: 100%;
 			margin: .25rem 0;
+			transition: font-weight .1s;
+		}
+		.heading{
+			position: relative;
+			width: 100%;
+			&:before{
+				content: '';
+				position: absolute;
+				top: 50%;
+				right: 100%;
+				bottom: 50%;
+				left: 6.5rem;
+				transform: translateY(-50%);
+				border: 1px solid transparent;
+				transition: border .3s, right .3s;
+			}
+		}
+		&:hover{
+			ul.fade{
+				&:before{
+					top: 50%;
+				}
+			}
+			.heading:before{
+				right: 0;
+				border-color: $dark;
+			}
 		}
 	}	
-
+	
 	&__tags{
 		ul{
 			display: flex;
@@ -235,23 +285,17 @@ body{
 }
 
 .loadingOverlay{
-	display: grid;
-	justify-content: center;
-	display: none;
-	align-items: center;
+	width: 100%;
+	height: 100vh;
 	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: radial-gradient(circle at center, $light 20% , rgba(255, 255, 255, 0) 300%);
 	top: 0;
-	right: 0;
-	bottom: 0;
 	left: 0;
-	background: radial-gradient(circle at center, $light 20% , transparent 300%);
+	z-index: 999;
 	.spinner {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		display: block;
-		float: left;
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
@@ -262,14 +306,20 @@ body{
 	}
 }
 @keyframes spinner {
-	0% { transform: rotate(0); }
+	0% { transform: rotate(0);}
 	100% { transform: rotate(360deg); }
 }
 
 /* Landscape phone to portrait tablet */
 @media (min-width: 768px) {
 	.artistCard {
+		&__expand{
+			// display: flex;
+			// flex-wrap: wrap;
+			// justify-content: space-between;
+		}
 		&__tracks, &__albums{
+			position: relative;
 			li {
 				flex-wrap: initial;
 				justify-content: space-between;

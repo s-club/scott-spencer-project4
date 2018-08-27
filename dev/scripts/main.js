@@ -113,8 +113,8 @@ app.getSimilarArtistsTopTracks = (array) => {
                         
                         return {
                             name: song.name,
-                            listeners: song.listeners,
-                            playcount: song.playcount,
+                            listeners: numberWithCommas(song.listeners),
+                            playcount: numberWithCommas(song.playcount),
                             // dig through the the array of image objects to return only the url of the extralarge sized images
                             img: song.image
                                     .filter((img) => img.size === "extralarge")
@@ -146,7 +146,7 @@ app.getSimilarArtistsTopAlbums = (array) => {
                 map((album) => {
                     return{
                         name: album.name,
-                        playcount: album.playcount,
+                        playcount: numberWithCommas(album.playcount),
                         image: album.image.
                         filter((img) => img.size === "extralarge").
                         map((img) => img["#text"]).toString(),
@@ -172,6 +172,7 @@ app.getArtistFromRes = (rootObject) => {
     return rootObject['@attr'].artist
 };
 
+// creat an "artist card" for each similar artist
 app.createArtistCard = (array) => {
     $('.artistCardContainer').empty()
     array.forEach((artist) => {
@@ -198,16 +199,17 @@ app.createArtistCard = (array) => {
                 <ul></ul>
             </div>
             <div class="artistCard artistCard__tracks">
-                <h3>Top Tracks:</h3>
-                <ul></ul>
+                <h3 class="heading">Top Tracks:</h3>
+                <ul class="fade"></ul>
             </div>
             <div class="artistCard artistCard__albums">
-                <h3>Top Albums:</h3>
-                <ul></ul>
+                <h3 class="heading">Top Albums:</h3>
+                <ul class="fade"></ul>
             </div>
         </div>
         `)
     });
+    
     // add tags to dom
     app.addPropsToDom(array, "tags")
 
@@ -250,7 +252,6 @@ app.addPropsToDom = (array, prop) => {
     $(".artistCard__expand").hide();
 }
 
-
 // A function to make the "match meter" match it's width % to it's data('percentmatch') value
 app.percentMatch = () => {
     $('.artistCard__match--innerBar').each(function () {
@@ -283,6 +284,10 @@ app.events = () => {
         $(this).find('svg').toggleClass('bannerClick')
     });
 
+    $('.artistCardContainer').on('click', '.artistCard__tracks, .artistCard__albums', function () {
+        $(this).find('ul').toggleClass('fade')
+    });
+
     // $('.searchForm').find('input')
     $('.searchForm').find('.searchForm__input').on('keyup', function(e){
         const inputVal = $(this).val()
@@ -296,6 +301,11 @@ app.events = () => {
         $('.searchForm__input').val("")
     });
 };
+
+// Comma seperate numbers - scoped globally for general utility
+const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 // Initialize app
 app.init = () => {

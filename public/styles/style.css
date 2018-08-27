@@ -216,7 +216,8 @@ footer {
   -ms-flex-item-align: end;
       align-self: flex-end;
   background: #022644;
-  color: #D7E3ED; }
+  color: #D7E3ED;
+  font-size: .7rem; }
   footer h4 {
     font-weight: 300;
     margin: .5rem 0; }
@@ -313,7 +314,7 @@ body {
   transition: background .3s, color .3s; }
 
 .artistCard__tags, .artistCard__tracks, .artistCard__albums {
-  margin: 4rem 0;
+  margin: 2rem 0;
   font-size: 0.8rem; }
   .artistCard__tags li, .artistCard__tracks li, .artistCard__albums li {
     display: -webkit-box;
@@ -328,6 +329,27 @@ body {
     font-weight: 300;
     margin: 0; }
 
+.artistCard__tracks ul, .artistCard__albums ul {
+  position: relative;
+  height: 100%;
+  background: transparent;
+  z-index: 100;
+  overflow: visible; }
+  .artistCard__tracks ul.fade, .artistCard__albums ul.fade {
+    max-height: 40vh;
+    overflow: hidden; }
+    .artistCard__tracks ul.fade:before, .artistCard__albums ul.fade:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: -webkit-gradient(linear, left bottom, left top, color-stop(20%, #D7E3ED), to(rgba(255, 255, 255, 0)));
+      background: linear-gradient(to top, #D7E3ED 20%, rgba(255, 255, 255, 0));
+      -webkit-transition: top .3s;
+      transition: top .3s; }
+
 .artistCard__tracks li, .artistCard__albums li {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -339,7 +361,32 @@ body {
 
 .artistCard__tracks h4, .artistCard__albums h4 {
   width: 100%;
-  margin: .25rem 0; }
+  margin: .25rem 0;
+  -webkit-transition: font-weight .1s;
+  transition: font-weight .1s; }
+
+.artistCard__tracks .heading, .artistCard__albums .heading {
+  position: relative;
+  width: 100%; }
+  .artistCard__tracks .heading:before, .artistCard__albums .heading:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    bottom: 50%;
+    left: 6.5rem;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    border: 1px solid transparent;
+    -webkit-transition: border .3s, right .3s;
+    transition: border .3s, right .3s; }
+
+.artistCard__tracks:hover ul.fade:before, .artistCard__albums:hover ul.fade:before {
+  top: 50%; }
+
+.artistCard__tracks:hover .heading:before, .artistCard__albums:hover .heading:before {
+  right: 0;
+  border-color: #022644; }
 
 .artistCard__tags ul {
   display: -webkit-box;
@@ -371,28 +418,23 @@ body {
           transform: rotate(180deg); }
 
 .loadingOverlay {
-  display: grid;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: fixed;
+  background: radial-gradient(circle at center, #D7E3ED 20%, rgba(255, 255, 255, 0) 300%);
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
-  background: radial-gradient(circle at center, #D7E3ED 20%, transparent 300%); }
+  z-index: 999; }
   .loadingOverlay .spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-    display: block;
-    float: left;
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
@@ -420,14 +462,16 @@ body {
 
 /* Landscape phone to portrait tablet */
 @media (min-width: 768px) {
-  .artistCard__tracks li, .artistCard__albums li {
-    -ms-flex-wrap: initial;
-        flex-wrap: initial;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between; }
-  .artistCard__tracks h4, .artistCard__albums h4 {
-    width: initial; }
+  .artistCard__tracks, .artistCard__albums {
+    position: relative; }
+    .artistCard__tracks li, .artistCard__albums li {
+      -ms-flex-wrap: initial;
+          flex-wrap: initial;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between; }
+    .artistCard__tracks h4, .artistCard__albums h4 {
+      width: initial; }
   header input[type="text"] {
     width: 25vmax; }
     header input[type="text"]:focus {
